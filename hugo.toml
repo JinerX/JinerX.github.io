@@ -1,0 +1,78 @@
+baseURL = 'https://blog-jsajnog.com/'
+languageCode = 'en-us'
+title = 'JinerX blog'
+theme = 'blowfish'
+
+[params]
+  colorScheme = "blowfish"
+  defaultTheme = "dark"
+  enableSearch = true
+  math = true
+  mainSections = ["learning_log", "projects", "posts"]
+
+  [params.home]
+    showRecent = true
+    recentLimit = 5 
+
+  [params.author]
+    name = "Jędrzej Sajnóg"
+    image = "img/me.png"
+    headline = "AI | Python | C++ | C | Linux | Neuroinformatics | Graph Theory | Linear Algebra"
+    bio = "Welcome! My name is Jędrzej Sajnóg and I am a student of algorithmic computer science at Wroclaw University of Science and Technology. This is my blog, where I document and describe technical topics and projects I find interesting."
+    links = [
+      { icon = "github", href = "https://github.com/JinerX" },
+      # TBA
+      { icon = "linkedin", href = "https://www.linkedin.com/in/j%C4%99drzej-sajn%C3%B3g-aaa3093b5/" }
+    ]
+
+  [params.article]
+    math = true
+    toc = true
+    showDate = true
+    showReadingTime = true
+    showAuthor = false
+
+  [params.mermaid]
+    enable = true
+
+[menu]
+  [[menu.main]]
+    identifier = "projects"
+    name = "Projects"
+    url = "/projects/"
+    weight = 10
+    pre = "rocket"
+
+  [[menu.main]]
+    identifier = "posts"
+    name = "Articles"
+    url = "/posts/"
+    weight = 20
+    pre = "pen-tool"
+
+  [[menu.main]]
+    identifier = "log"
+    name = "learning log"
+    url = "/learning_log/"
+    weight = 30
+    pre = "lightbulb"
+
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 40
+    pre = "user"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        inlineDelimiters = ["$", "$", "\\(", "\\)"]
+        blockDelimiters = [
+          ["$$", "$$"],
+          ["\\[", "\\]"]
+        ]

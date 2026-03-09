@@ -1,0 +1,61 @@
+{{ define "main" }}
+<div class="max-w-3xl mx-auto px-6 sm:px-8 mt-12 mb-20">
+
+    <header class="flex flex-col items-center text-center mb-16">
+        {{ $img := resources.Get .Site.Params.author.image }}
+        {{ if $img }}
+            {{ $img := $img.Fill "200x200 Center" }}
+            <img src="{{ $img.RelPermalink }}" 
+                 alt="{{ .Site.Params.author.name }}" 
+                 class="w-32 h-32 rounded-full mb-6 border-4 border-neutral-100 dark:border-neutral-800 shadow-md">
+        {{ end }}
+
+        <h1 class="text-4xl font-extrabold text-neutral-900 dark:text-white mb-2 tracking-tight">
+            {{ .Site.Params.author.name }}
+        </h1>
+
+        <p class="text-sm font-bold text-primary-600 dark:text-primary-400 uppercase tracking-widest mb-6">
+            {{ .Site.Params.author.headline }}
+        </p>
+
+        <div class="max-w-lg text-neutral-600 dark:text-neutral-400 text-base leading-relaxed mb-8">
+            {{ .Site.Params.author.bio | markdownify }}
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-4">
+            {{ range .Site.Params.author.links }}
+            <a href="{{ .href }}" target="_blank" rel="noopener" 
+               class="p-2 rounded-full bg-neutral-100 dark:bg-neutral-800 hover:bg-primary-600 hover:text-white text-neutral-700 dark:text-neutral-300 transition-colors duration-200">
+                {{ partial "icon.html" .icon }} 
+            </a>
+            {{ end }}
+        </div>
+    </header>
+
+    <hr class="border-t border-neutral-200 dark:border-neutral-800 mb-12">
+
+    <section>
+        {{ if .Site.Params.home.showRecent }}
+            <div class="flex items-baseline justify-between mb-8">
+                <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+                    Latest Posts
+                </h2>
+            </div>
+
+            {{ $limit := .Site.Params.home.recentLimit | default 5 }}
+            {{ $sections := .Site.Params.mainSections | default (slice "posts") }}
+            {{ $pages := where .Site.RegularPages "Type" "in" $sections }}
+            {{ $pages := sort $pages "Date" "desc" }}
+
+            <div class="flex flex-col gap-8">
+                {{ range first $limit $pages }}
+                    <div class="group">
+                        {{ partial "article-link/simple.html" . }}
+                    </div>
+                {{ end }}
+            </div>
+        {{ end }}
+    </section>
+
+</div>
+{{ end }}
