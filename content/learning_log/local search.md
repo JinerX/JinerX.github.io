@@ -2,7 +2,7 @@
 title: 'Local search'
 date: 2026-03-19T19:04:21+01:00
 draft: false
-tags: ["approximation algorithms", "algorithms"]
+tags: ["heuristic algorithms", "algorithms"]
 math: true
 ---
 
